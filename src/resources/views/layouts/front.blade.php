@@ -41,6 +41,7 @@
                     <a class="nav-link" href="{{route('admin.categories.index')}}">Categorias</a>
                 </li>
             </ul>
+        @endauth
 
             <div class="my-2 my-lg-0">
                 <ul class="navbar-nav mr-auto">
@@ -54,7 +55,6 @@
                     </li>
                 </ul>
             </div>
-        @endauth
 
         </div>
     </nav>
