@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Routing\Route;
+
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/product/{slug}', 'HomeController@single')->name('product.single');
 
@@ -24,7 +26,8 @@ Route::prefix('cart')->name('cart.')->group(function() {
 
 Route::prefix('checkout')->name('checkout.')->group(function() {
     Route::get('/', 'CheckoutController@index')->name('index');
-    Route::post('/process', 'CheckoutController@process')->('process');
+    Route::post('/process', 'CheckoutController@process')->name('process');
+    Route::get('/thanks', 'CheckoutController@thanks')->name('thanks');
 });
 
 Route::group(['middleware' => ['auth']], function() {
