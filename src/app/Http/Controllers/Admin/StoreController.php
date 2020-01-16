@@ -44,8 +44,9 @@ class StoreController extends Controller
         
         $store = $user->store()->create($data);
 
-        flash('Loja Criada com Sucesso')->success();
-        return redirect()->route('admin.stores.index');
+        // flash('Loja Criada com Sucesso')->success();
+        // return redirect()->route('admin.stores.index');
+        return redirect(route('admin.stores.index'))->with('success', 'Loja Criada com Sucesso');
     }
 
     public function edit($store)
@@ -70,8 +71,9 @@ class StoreController extends Controller
 
         $store->update($data);
 
-        flash('Loja Atualizada com Sucesso')->success();
-        return redirect()->route('admin.stores.index');
+        // flash('Loja Atualizada com Sucesso')->success();
+        // return redirect()->route('admin.stores.index');
+        return redirect(route('admin.stores.index'))->with('success', 'Loja Atualizada com Sucesso');
     }
 
     public function destroy($store)
@@ -79,7 +81,8 @@ class StoreController extends Controller
         $store = Store::find($store);
         $store->delete();
 
-        flash('Loja Removida com Sucesso')->success();
-        return redirect()->route('admin.stores.index');
+        // flash('Loja Removida com Sucesso')->success();
+        // return redirect()->route('admin.stores.index');
+        return redirect(route('admin.stores.index'))->with('success', 'Loja Removida com Sucesso');
     }
 }

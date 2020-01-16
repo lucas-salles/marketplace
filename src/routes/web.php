@@ -13,6 +13,7 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/product/{slug}', 'HomeController@single')->name('product.single');
+Route::get('/search', 'HomeController@search')->name('search');
 
 Route::prefix('cart')->name('cart.')->group(function() {
     Route::get('/', 'CartController@index')->name('index');
@@ -38,6 +39,8 @@ Route::group(['middleware' => ['auth']], function() {
         //     Route::post('/update/{store}', 'StoreController@update')->name('update');
         //     Route::post('/destroy/{store}', 'StoreController@destroy')->name('destroy');
         // });
+
+        Route::resource('users', 'UserController');
     
         Route::resource('stores', 'StoreController');
         Route::resource('products', 'ProductController');

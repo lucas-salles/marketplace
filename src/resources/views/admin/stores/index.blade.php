@@ -1,8 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+@if(session()->get('success'))
+<div class="alert alert-success">
+    {{ session()->get('success') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div><br />
+@endif
+
 @if(!$store)
-<a href="{{route('admin.stores.create')}}" class="btn btn-lg btn-success">Criar Loja</a>
+<a href="{{route('admin.stores.create')}}" class="btn btn-primary mt-2">Criar Loja</a>
 @else
 <table class="table table-striped">
     <thead>

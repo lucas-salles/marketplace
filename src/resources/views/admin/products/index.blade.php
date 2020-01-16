@@ -1,7 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="{{route('admin.products.create')}}" class="btn btn-lg btn-success">Criar Produto</a>
+@if(session()->get('success'))
+<div class="alert alert-success">
+    {{ session()->get('success') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div><br />
+@endif
+
+@if(!$userStore)
+<div class="alert alert-warning">
+    Você precisa criar uma loja primeiro para poder cadastrar produtos.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div><br />
+@else
 <table class="table table-striped">
     <thead>
         <tr>
@@ -35,5 +51,6 @@
 </table>
 
 {{$products->links()}}
-
+<a href="{{route('admin.products.create')}}" class="btn btn-primary mt-2">Criar Produto</a>
+@endif
 @endsection

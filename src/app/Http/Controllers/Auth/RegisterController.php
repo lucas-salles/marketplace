@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/stores';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -51,6 +51,14 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'cpf' => ['required'],
+            'endereco' => ['required'],
+            'numero' => ['required'],
+            'bairro' => ['required'],
+            'cidade' => ['required'],
+            'estado' => ['required'],
+            'cep' => ['required'],
+            'celular' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -66,6 +74,16 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'cpf' => $data['cpf'],
+            'endereco' => $data['endereco'],
+            'numero' => $data['numero'],
+            'complemento' => $data['complemento'],
+            'bairro' => $data['bairro'],
+            'cidade' => $data['cidade'],
+            'estado' => $data['estado'],
+            'cep' => $data['cep'],
+            'fone' => $data['fone'],
+            'celular' => $data['celular'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

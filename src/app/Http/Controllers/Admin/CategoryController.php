@@ -43,8 +43,9 @@ class CategoryController extends Controller
 
         $category = Category::create($data);
         
-	    flash('Categoria Criada com Sucesso!')->success();
-	    return redirect()->route('admin.categories.index');
+	    // flash('Categoria Criada com Sucesso!')->success();
+        // return redirect()->route('admin.categories.index');
+        return redirect(route('admin.categories.index'))->with('success', 'Categoria Criada com Sucesso');
     }
 
     /**
@@ -85,8 +86,9 @@ class CategoryController extends Controller
 	    $category = Category::find($category);
         $category->update($data);
         
-	    flash('Categoria Atualizada com Sucesso!')->success();
-	    return redirect()->route('admin.categories.index');
+	    // flash('Categoria Atualizada com Sucesso!')->success();
+        // return redirect()->route('admin.categories.index');
+        return redirect(route('admin.categories.index'))->with('success', 'Categoria Atualizada com Sucesso');
     }
 
     /**
@@ -100,7 +102,8 @@ class CategoryController extends Controller
         $category = Category::find($category);
         $category->delete();
         
-	    flash('Categoria Removida com Sucesso!')->success();
-	    return redirect()->route('admin.categories.index');
+	    // flash('Categoria Removida com Sucesso!')->success();
+        // return redirect()->route('admin.categories.index');
+        return redirect(route('admin.categories.index'))->with('success', 'Categoria Removida com Sucesso');
     }
 }

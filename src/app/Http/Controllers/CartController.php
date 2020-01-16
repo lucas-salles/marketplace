@@ -33,14 +33,15 @@ class CartController extends Controller
             session()->put('cart', $products);
         }
 
-        flash('Produto Adicionado no Carrinho')->success();
-        return redirect()->route('product.single', ['slug' => $product['slug']]);
+        // flash('Produto Adicionado no Carrinho')->success();
+        // return redirect()->route('product.single', ['slug' => $product['slug']]);
+        return redirect(route('product.single', ['slug' => $product['slug']]))->with('success', 'Produto Adicionado no Carrinho');
     }
 
     public function remove($slug)
     {
         if(!session()->has('cart'))
-            return redirect()->route('cart.index');
+            return redirect(route('cart.index'));
 
         $products = session()->get('cart');
 
@@ -49,15 +50,16 @@ class CartController extends Controller
         });
 
         session()->put('cart', $products);
-        return redirect()->route('cart.index');
+        return redirect(route('cart.index'));
     }
 
     public function cancel()
     {
         session()->forget('cart');
 
-        flash('Desistência da compra realizada com sucesso!')->success();
-        return redirect()->route('cart.index');
+        // flash('Desistência da compra realizada com sucesso!')->success();
+        // return redirect()->route('cart.index');
+        return redirect(route('cart.index'))->with('success', 'Desistência da compra realizada com sucesso');
     }
     
     private function productIncrement($slug, $amount, $products)

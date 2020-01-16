@@ -22,9 +22,14 @@ class ProductController extends Controller
     public function index()
     {
         $userStore = auth()->user()->store;
-        $products = $userStore->products()->paginate(10);
+        if(!is_null($userStore)) {
+            $products = $userStore->products()->paginate(10);
+        } else {
+            $products = null;
+        }
+        
 
-        return view('admin.products.index', compact('products'));
+        return view('admin.products.index', compact('products', 'userStore'));
     }
 
     /**
@@ -61,8 +66,9 @@ class ProductController extends Controller
             $product->photos()->createMany($images);
         }
 
-        flash('Produto Criado com Sucesso')->success();
-        return redirect()->route('admin.products.index');
+        // flash('Produto Criado com Sucesso')->success();
+        // return redirect()->route('admin.products.index');
+        return redirect(route('admin.products.index'))->with('success', 'Produto Criado com Sucesso');
     }
 
     /**
@@ -115,8 +121,9 @@ class ProductController extends Controller
             $product->photos()->createMany($images);
         }
 
-        flash('Produto Atualizado com Sucesso')->success();
-        return redirect()->route('admin.products.index');
+        // flash('Produto Atualizado com Sucesso')->success();
+        // return redirect()->route('admin.products.index');
+        return redirect(route('admin.products.index'))->with('success', 'Produto Atualizado com Sucesso');
     }
 
     /**
@@ -130,7 +137,8 @@ class ProductController extends Controller
         $product = Product::find($product);
         $product->delete();
 
-        flash('Produto Removido com Sucesso')->success();
-        return redirect()->route('admin.products.index');
+        // flash('Produto Removido com Sucesso')->success();
+        // return redirect()->route('admin.products.index');
+        return redirect(route('admin.products.index'))->with('success', 'Produto Removido com Sucesso');
     }
 }
