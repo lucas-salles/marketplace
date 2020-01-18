@@ -33,8 +33,6 @@ class CartController extends Controller
             session()->put('cart', $products);
         }
 
-        // flash('Produto Adicionado no Carrinho')->success();
-        // return redirect()->route('product.single', ['slug' => $product['slug']]);
         return redirect(route('product.single', ['slug' => $product['slug']]))->with('success', 'Produto Adicionado no Carrinho');
     }
 
@@ -57,8 +55,6 @@ class CartController extends Controller
     {
         session()->forget('cart');
 
-        // flash('Desistência da compra realizada com sucesso!')->success();
-        // return redirect()->route('cart.index');
         return redirect(route('cart.index'))->with('success', 'Desistência da compra realizada com sucesso');
     }
     

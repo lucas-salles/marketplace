@@ -24,8 +24,6 @@ class ProductPhotoController extends Controller
 
         $removePhoto->delete();
 
-        // flash('Imagem removida com sucesso')->success();
-        // return redirect()->route('admin.products.edit', ['product' => $productId]);
         return redirect(route('admin.products.edit', ['product' => $productId]))->with('success', 'Imagem removida com sucesso');
     }
 }

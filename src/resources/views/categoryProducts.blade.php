@@ -20,6 +20,7 @@
 
         <div class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="container">
+                <h1 class="pt-4">Todos os produtos da categoria {{$categorySelected->name}}</h1>
                 <div class="p-4 align-self-center">
                     <form action="{{ route('search') }}" method="GET" class="py-4">
                         <div class="input-group input-group-lg">
@@ -34,12 +35,7 @@
             </div>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                 <div class="container">
-                    @if(count($products) == 0)
-                    <div class="row">
-                        <h1>Nenhum produto encontrado com o nome pesquisado.</h1>
-                    </div>
-                    @else
-                    <div class="row">
+                    <div class="row front">
                         @foreach($products as $product)
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-sm">
@@ -58,7 +54,7 @@
                         </div>
                         @endforeach
                     </div>
-                    @endif
+                    {{$products->links()}}
                 </div>
             </div>
         </div>

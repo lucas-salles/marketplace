@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Category;
+use App\Product;
 
 class CategoryTableSeeder extends Seeder
 {
@@ -12,6 +13,19 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Category::class, 5)->create();
+        factory(Category::class, 10)->create();
+
+        $products = Product::all();
+        $categories = Category::all();
+        foreach ($categories as $category) {
+            $cont = 0;
+            foreach ($products as $key => $product) { 
+                $category->products()->attach($product);
+                $products->forget($key);
+                if($cont==3)
+                    break;
+                $cont++;
+            }
+        }
     }
 }

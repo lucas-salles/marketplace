@@ -33,7 +33,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{auth()->user()->name}}</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{route('admin.users.edit', ['user' => auth()->user()->id])}}">Atualizar Dados</a>
+                            <a class="dropdown-item" href="{{route('admin.users.edit', ['user' => auth()->user()->id])}}">Atualizar dados</a>
                             <a class="dropdown-item" href="{{route('admin.stores.index')}}">Minha Loja</a>
                         </div>
                     </li> 
@@ -50,7 +50,6 @@
     </nav>
 
     <div class="container">
-        @include('flash::message')
         @yield('content')
     </div>
 

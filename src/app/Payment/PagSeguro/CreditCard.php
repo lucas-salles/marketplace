@@ -33,8 +33,10 @@ class CreditCard
             );
         }
 
+        // If you using SANDBOX you must use an email @sandbox.pagseguro.com.br
         $user = $this->user;
-        $email = env('PAGSEGURO_ENV') == 'sandbox' ? 'test@sandbox.pagseguro.com.br' : $user->email;
+        // $email = env('PAGSEGURO_ENV') == 'sandbox' ? 'test@sandbox.pagseguro.com.br' : $user->email;
+        $email = 'test@sandbox.pagseguro.com.br';
 
         $creditCard->setSender()->setName($user->name);
         $creditCard->setSender()->setEmail($email);

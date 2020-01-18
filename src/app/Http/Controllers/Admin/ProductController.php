@@ -66,8 +66,6 @@ class ProductController extends Controller
             $product->photos()->createMany($images);
         }
 
-        // flash('Produto Criado com Sucesso')->success();
-        // return redirect()->route('admin.products.index');
         return redirect(route('admin.products.index'))->with('success', 'Produto Criado com Sucesso');
     }
 
@@ -121,8 +119,6 @@ class ProductController extends Controller
             $product->photos()->createMany($images);
         }
 
-        // flash('Produto Atualizado com Sucesso')->success();
-        // return redirect()->route('admin.products.index');
         return redirect(route('admin.products.index'))->with('success', 'Produto Atualizado com Sucesso');
     }
 
@@ -135,10 +131,11 @@ class ProductController extends Controller
     public function destroy($product)
     {
         $product = Product::find($product);
+        $product->categories()->detach();
+        $product->store()->dissociate();
+        $product->photos()->detach();
         $product->delete();
 
-        // flash('Produto Removido com Sucesso')->success();
-        // return redirect()->route('admin.products.index');
         return redirect(route('admin.products.index'))->with('success', 'Produto Removido com Sucesso');
     }
 }

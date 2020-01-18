@@ -16,7 +16,7 @@ class CheckoutController extends Controller
         if(!session()->has('cart'))
             return redirect()->route('home');
 
-        $this->makePagSeguroSession();
+        // $this->makePagSeguroSession();
 
         $cartItems = array_map(function($line) {
             return $line['amount'] * $line['price'];
@@ -83,8 +83,7 @@ class CheckoutController extends Controller
                 \PagSeguro\Configuration\Configure::getAccountCredentials()
             );
             
-            return session()->put('pagseguro_session_code', $sessionCode->getResult());
+            session()->put('pagseguro_session_code', $sessionCode->getResult());
         }
-        
     }
 }
