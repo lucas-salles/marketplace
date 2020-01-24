@@ -9,7 +9,7 @@
                 <ul class="nav flex-column">
                     @foreach($categories as $category)
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('products.category',  ['category' => $category->id])}}">
+                        <a class="nav-link" href="{{route('products.category',  ['slug' => $category->slug])}}">
                             {{$category->name}}
                         </a>
                     </li>
@@ -23,7 +23,7 @@
                 <div class="p-4 align-self-center">
                     <form action="{{ route('search') }}" method="GET" class="py-4">
                         <div class="input-group input-group-lg">
-                            <input type="text" class="form-control" name="busca" id="busca" placeholder="Buscar por nome" aria-label="busca"
+                            <input type="search" class="form-control" name="busca" id="busca" placeholder="Buscar por nome" aria-label="busca"
                                 aria-describedby="button-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button" id="button-addon2">Buscar</button>

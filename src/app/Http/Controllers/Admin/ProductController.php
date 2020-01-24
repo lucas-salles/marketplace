@@ -133,7 +133,6 @@ class ProductController extends Controller
         $product = Product::find($product);
         $product->categories()->detach();
         $product->store()->dissociate();
-        $product->photos()->detach();
         $product->delete();
 
         return redirect(route('admin.products.index'))->with('success', 'Produto Removido com Sucesso');

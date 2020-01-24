@@ -1,16 +1,22 @@
 @extends('layouts.front')
 
+@section('stylesheets')
+<!-- jQuery 1.8 or later, 33 KB -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Fotorama from CDNJS, 19 KB -->
+<link  href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+@endsection
+
 @section('content')
 <div class="container pt-4">
     <div class="row">
         <div class="col-6">
             @if($product->photos->count())
-            <img src="{{asset('storage/' . $product->photos->first()->image)}}" alt=""  class="card-img-top">
-            <div class="row mt-4">
+            <div class="fotorama" data-nav="thumbs">>
                 @foreach($product->photos as $photo)
-                <div class="col-4">
-                    <img src="{{asset('storage/' . $photo->image)}}" alt="" class="img-fluid">
-                </div>
+                <img src="{{asset('storage/' . $photo->image)}}">
                 @endforeach
             </div>
             @else

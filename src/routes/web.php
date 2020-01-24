@@ -14,7 +14,7 @@
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/product/{slug}', 'HomeController@single')->name('product.single');
 Route::get('/search', 'HomeController@search')->name('search');
-Route::get('/products/{category}', 'HomeController@categoryProducts')->name('products.category');
+Route::get('/products/{slug}', 'HomeController@categoryProducts')->name('products.category');
 
 Route::prefix('cart')->name('cart.')->group(function() {
     Route::get('/', 'CartController@index')->name('index');

@@ -31,9 +31,9 @@ class HomeController extends Controller
         return view('search', compact('products', 'categories'));
     }
 
-    public function categoryProducts($category)
+    public function categoryProducts($slug)
     {
-        $categorySelected = Category::find($category);
+        $categorySelected = Category::whereSlug($slug)->first();
         $categories = Category::all();
         $products = $categorySelected->products()->paginate(9);
 

@@ -1,12 +1,12 @@
 <?php
 namespace App\Traits;
 
+use Illuminate\Support\Facades\Storage;
+
 trait UploadTrait
 {
     private function imageUpload($images, $imageColumn = null)
     {
-        
-
         $uploadedImages = [];
 
         if(is_array($images)) {
