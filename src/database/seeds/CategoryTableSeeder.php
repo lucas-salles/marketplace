@@ -13,7 +13,7 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Category::class, 10)->create();
+        factory(Category::class, 40)->create();
 
         $products = Product::all();
         $categories = Category::all();

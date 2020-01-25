@@ -8,7 +8,9 @@ use App\Product;
 use App\Store;
 use App\Category;
 use App\Http\Requests\ProductRequest;
+use App\ProductPhoto;
 use App\Traits\UploadTrait;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -133,6 +135,16 @@ class ProductController extends Controller
         $product = Product::find($product);
         $product->categories()->detach();
         $product->store()->dissociate();
+        foreach ($product->photos as $photo) {
+            //Remover dos arquivos
+            if(Storage::disk('public')->exists($photo->image)) {
+                Storage::disk('public')->delete($photo->image);
+            }
+
+            //Remover a imagem do banco
+            $removePhoto = ProductPhoto::where('image', $photo->image);
+            $removePhoto->delete();
+        }
         $product->delete();
 
         return redirect(route('admin.products.index'))->with('success', 'Produto Removido com Sucesso');
