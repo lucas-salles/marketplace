@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Product;
+use App\Store;
 
 class HomeController extends Controller
 {
     public function index()
     {
         $products = Product::limit(9)->orderBy('id', 'DESC')->get();
+        $stores = Store::limit(3)->orderBy('id', 'DESC')->get();
+
         $productsCarousel = Product::limit(3)->orderBy('id', 'DESC')->get();
-        $categories = Category::all();
-        return view('welcome', compact('products', 'productsCarousel', 'categories'));
+        
+
+        return view('welcome', compact('products', 'stores', 'productsCarousel'));
     }
 
     public function single($slug)
@@ -25,18 +29,8 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {
-        $categories = Category::all();
         $data = $request->all();
         $products = Product::where('name', 'LIKE', "%{$data['busca']}%")->get();
-        return view('search', compact('products', 'categories'));
-    }
-
-    public function categoryProducts($slug)
-    {
-        $categorySelected = Category::whereSlug($slug)->first();
-        $categories = Category::all();
-        $products = $categorySelected->products()->paginate(9);
-
-        return view('categoryProducts', compact('products', 'categorySelected', 'categories'));
+        return view('search', compact('products'));
     }
 }

@@ -6,11 +6,11 @@
         <nav class="col-md-2 d-none d-md-block bg-light sidebar pt-5">
             <div class="sidebar-sticky">
                 <span>Todas as Categorias</span>
-                <ul class="nav flex-column">
-                    @foreach($categories as $category)
+                <ul class="navbar-nav flex-column">
+                    @foreach($categories as $c)
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('products.category',  ['slug' => $category->slug])}}">
-                            {{$category->name}}
+                        <a class="nav-link" href="{{route('category.single',  ['slug' => $c->slug])}}">
+                            {{$c->name}}
                         </a>
                     </li>
                     @endforeach
@@ -20,22 +20,24 @@
 
         <div class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="container">
-                <h1 class="pt-4">Todos os produtos da categoria {{$categorySelected->name}}</h1>
                 <div class="p-4 align-self-center">
                     <form action="{{ route('search') }}" method="GET" class="py-4">
                         <div class="input-group input-group-lg">
                             <input type="search" class="form-control" name="busca" id="busca" placeholder="Buscar por nome" aria-label="busca"
                                 aria-describedby="button-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" id="button-addon2">Buscar</button>
+                                <button class="btn btn-primary" type="submit" id="button-addon2">Buscar</button>
                             </div>
                         </div>
                     </form>
                 </div>
+                <h1 class="pt-4">{{$category->name}}</h1>
+                <hr>
             </div>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                 <div class="container">
-                    <div class="row front">
+                    @if($products->count())
+                    <div class="row">
                         @foreach($products as $product)
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-sm">
@@ -55,6 +57,9 @@
                         @endforeach
                     </div>
                     {{$products->links()}}
+                    @else
+                    <h3 class="alert alert-warning">Nenhum produto encontrado para esta categoria</h3>
+                    @endif
                 </div>
             </div>
         </div>

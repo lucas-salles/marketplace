@@ -59,10 +59,10 @@
         <nav class="col-md-2 d-none d-md-block bg-light sidebar pt-5">
             <div class="sidebar-sticky">
                 <span>Todas as Categorias</span>
-                <ul class="nav flex-column">
+                <ul class="navbar-nav flex-column">
                     @foreach($categories as $category)
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('products.category', ['slug' => $category->slug])}}">
+                        <a class="nav-link" href="{{route('category.single', ['slug' => $category->slug])}}">
                             {{$category->name}}
                         </a>
                     </li>
@@ -79,7 +79,7 @@
                             <input type="search" class="form-control" name="busca" id="busca" placeholder="Buscar por nome" aria-label="busca"
                                 aria-describedby="button-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" id="button-addon2">Buscar</button>
+                                <button class="btn btn-primary" type="submit" id="button-addon2">Buscar</button>
                             </div>
                         </div>
                     </form>
@@ -103,6 +103,25 @@
                                     <a href="{{route('product.single', ['slug' => $product->slug])}}" class="btn btn-success">Ver Produto</a>
                                 </div>
                             </div>
+                        </div>
+                        @endforeach
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>Lojas Destaque</h2>
+                            <hr>
+                        </div>
+                        @foreach($stores as $store)
+                        <div class="col-4">
+                            @if($store->logo)
+                            <img src="{{asset('storage/' . $store->logo)}}" alt="Logo da loja {{$store->name}}" class="img-fluid">
+                            @else
+                            <img src="https://via.placeholder.com/600X300.png?text=logo" alt="Loja sem logo" class="img-fluid">
+                            @endif
+                            <h3>{{$store->name}}</h3>
+                            <p>{{$store->description}}</p>
+                            <a href="{{route('store.single', ['slug' => $store->slug])}}" class="btn btn-sm btn-success">Ver Loja</a>
                         </div>
                         @endforeach
                     </div>

@@ -31,12 +31,31 @@
                         </div>
                     </form>
                 </div>
+                <div class="row">
+                    <div class="col-4">
+                        @if($store->logo)
+                        <img src="{{asset('storage/' . $store->logo)}}" alt="Logo da loja {{$store->name}}" class="img-fluid">
+                        @else
+                        <img src="https://via.placeholder.com/600X300.png?text=logo" alt="Loja sem logo" class="img-fluid">
+                        @endif
+                    </div>
+                    <div class="col-8">
+                        <h1 class="pt-4">{{$store->name}}</h1>
+                        <p>{{$store->description}}</p>
+                        <div>
+                            <strong>Contatos:</strong>
+                            <span>{{$store->phone}} | {{$store->mobile_phone}}</span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <hr>
+                        <h3 class="pb-2">Produtos desta loja</h3>
+                    </div>
+                </div>
             </div>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                 <div class="container">
-                    @if(count($products) == 0)
-                    <h3 class="alert alert-warning">Nenhum produto encontrado com o nome pesquisado</h3>
-                    @else
+                    @if($products->count())
                     <div class="row">
                         @foreach($products as $product)
                         <div class="col-md-4">
@@ -56,6 +75,9 @@
                         </div>
                         @endforeach
                     </div>
+                    {{$products->links()}}
+                    @else
+                    <h3 class="alert alert-warning">Nenhum produto encontrado para esta loja</h3>
                     @endif
                 </div>
             </div>
