@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Marketplace</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
     @yield('stylesheets')
 </head>
 <body style="padding-top: 80px;">
@@ -35,6 +35,9 @@
                         </form>
                     </div>
                 </li>
+                <li class="nav-item @if(request()->is('my-orders')) active @endif">
+                    <a href="{{route('user.orders')}}" class="nav-link">Meus Pedidos</a>
+                </li>
                 @endauth
                 @guest
                 <li class="nav-item">
@@ -44,7 +47,7 @@
                     <a class="nav-link" href="{{ route('register') }}">Cadastre-se</a>
                 </li>
                 @endguest
-                <li class="nav-item">
+                <li class="nav-item @if(request()->is('cart')) active @endif">
                     <a href="{{ route('cart.index') }}" class="nav-link">
                         @if(session()->has('cart'))
                         <span class="badge badge-danger">{{array_sum(array_column(session()->get('cart'), 'amount'))}}</span>
@@ -61,9 +64,9 @@
         @yield('content')
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="{{asset('js/app.js')}}"></script>
     @yield('scripts')
 </body>
 </html>

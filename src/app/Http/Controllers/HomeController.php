@@ -13,11 +13,12 @@ class HomeController extends Controller
     {
         $products = Product::limit(9)->orderBy('id', 'DESC')->get();
         $stores = Store::limit(3)->orderBy('id', 'DESC')->get();
+        $categories = Category::all();
 
         $productsCarousel = Product::limit(3)->orderBy('id', 'DESC')->get();
         
 
-        return view('welcome', compact('products', 'stores', 'productsCarousel'));
+        return view('welcome', compact('products', 'stores', 'categories', 'productsCarousel'));
     }
 
     public function single($slug)
@@ -31,6 +32,7 @@ class HomeController extends Controller
     {
         $data = $request->all();
         $products = Product::where('name', 'LIKE', "%{$data['busca']}%")->get();
-        return view('search', compact('products'));
+        $categories = Category::all();
+        return view('search', compact('products', 'categories'));
     }
 }
