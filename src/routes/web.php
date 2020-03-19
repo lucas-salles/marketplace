@@ -29,10 +29,13 @@ Route::prefix('checkout')->name('checkout.')->group(function() {
     Route::get('/', 'CheckoutController@index')->name('index');
     Route::post('/process', 'CheckoutController@process')->name('process');
     Route::get('/thanks', 'CheckoutController@thanks')->name('thanks');
+
+    Route::post('/notification', 'CheckoutController@notification')->name('notification');
 });
 
-Route::group(['middleware' => ['auth']], function() {
-    Route::get('my-orders', 'UserOrderController@index')->name('user.orders');
+Route::get('my-orders', 'UserOrderController@index')->name('user.orders')->middleware('auth');
+
+Route::group(['middleware' => ['auth', 'access.control.store.admin']], function() {
 
     Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function() {
         Route::get('notifications', 'NotificationController@notifications')->name('notifications.index');

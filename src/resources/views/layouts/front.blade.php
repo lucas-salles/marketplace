@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 @auth
-                <li class="nav-item dropdown">
+                <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{auth()->user()->name}}</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -34,9 +34,15 @@
                             @csrf
                         </form>
                     </div>
-                </li>
+                </li> -->
                 <li class="nav-item @if(request()->is('my-orders')) active @endif">
                     <a href="{{route('user.orders')}}" class="nav-link">Meus Pedidos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="event.preventDefault(); document.querySelector('form.logout').submit();">Sair</a>
+                    <form action="{{route('logout')}}" method="POST" class="logout d-none">
+                        @csrf
+                    </form>
                 </li>
                 @endauth
                 @guest
@@ -64,8 +70,6 @@
         @yield('content')
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="{{asset('js/app.js')}}"></script>
     @yield('scripts')
 </body>

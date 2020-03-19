@@ -23,15 +23,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $userStore = auth()->user()->store;
-        if(!is_null($userStore)) {
-            $products = $userStore->products()->paginate(10);
-        } else {
-            $products = null;
-        }
-        
+        $user = auth()->user();
 
-        return view('admin.products.index', compact('products', 'userStore'));
+        if(!$user->store()->exists())
+            return redirect(route('admin.stores.index'))->with('success', 'É preciso cadastrar produtos!');
+
+        $products = $user->store->products()->paginate(10);
+        
+        return view('admin.products.index', compact('products'));
     }
 
     /**
@@ -56,6 +55,8 @@ class ProductController extends Controller
     {
         $data = $request->all();
         $categories = $request->get('categories', null);
+
+        $data['price'] = formatPriceToDatabase($data['price']);
 
         $store = auth()->user()->store;
         $product = $store->products()->create($data);

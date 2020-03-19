@@ -10,14 +10,6 @@
 </div><br />
 @endif
 
-@if(!$userStore)
-<div class="alert alert-warning">
-    Você precisa criar uma loja primeiro para poder cadastrar produtos.
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div><br />
-@else
 <table class="table table-striped">
     <thead>
         <tr>
@@ -52,5 +44,4 @@
 
 {{$products->links()}}
 <a href="{{route('admin.products.create')}}" class="btn btn-primary mt-2">Criar Produto</a>
-@endif
 @endsection
