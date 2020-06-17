@@ -135,7 +135,7 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label for="complemento">{{ __('Complemnto') }} <small>(Opcional)</small></label>
+                                <label for="complemento">{{ __('Complemento') }} <small>(Opcional)</small></label>
                                 <input type="complemento" name="complemento" id="complemento" class="form-control @error('complemento') is-invalid @enderror" placeholder="Complemento" value="{{ old('complemento') }}">
                             
                                 @error('complemento')
@@ -168,7 +168,7 @@
                             </div>
 
                             <div class="form-group col-md-3 col-6">
-                                <label for="estado">{{ __('Esatdo') }}</label>
+                                <label for="estado">{{ __('Estado') }}</label>
                                 <input type="text" name="estado" id="estado" class="form-control @error('estado') is-invalid @enderror" placeholder="Estado" value="{{ old('estado') }}" required autocomplete="estado" autofocus>
                             
                                 @error('estado')
@@ -191,7 +191,7 @@
 
                             <div class="form-group col-md-6">
                                 <label for="fone">{{ __('Telefone') }} <small>(Opcional)</small></label>
-                                <input type="fone" name="fone" id="fone" class="form-control @error('fone') is-invalid @enderror" placeholder="Número do telefone" value="{{ old('fone') }}">
+                                <input type="tel" name="fone" id="fone" class="form-control @error('fone') is-invalid @enderror" placeholder="Número do telefone" value="{{ old('fone') }}">
                             
                                 @error('fone')
                                     <span class="invalid-feedback" role="alert">
@@ -202,13 +202,22 @@
 
                             <div class="form-group col-md-6">
                                 <label for="celular">{{ __('Celular') }}</label>
-                                <input type="celular" name="celular" id="celular" class="form-control @error('celular') is-invalid @enderror" placeholder="Número do celular" value="{{ old('celular') }}" required autocomplete="celular" autofocus>
+                                <input type="tel" name="celular" id="celular" class="form-control @error('celular') is-invalid @enderror" placeholder="Número do celular" value="{{ old('celular') }}" required autocomplete="celular" autofocus>
                             
                                 @error('celular')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                Tipo:
+                                <input type="radio" name="role" id="user" value="ROLE_USER" checked>
+                                <label for="user">{{ __('Usuário Comum') }}</label>
+
+                                <input type="radio" name="role" id="owner" value="ROLE_OWNER">
+                                <label for="owner">{{ __('Dono de Loja') }}</label>
                             </div>
                         </div>
 
